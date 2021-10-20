@@ -1,0 +1,25 @@
+<%= render "shared/cell" do |p| %>
+  <%= p.content_for :title do %>
+    <% if subscription.included_prices.any? %>
+      <%= subscription.included_prices.map do |included_price| %>
+        <% product = included_price.price.product %>
+        <% capture do %>
+          <%= product.label_string %>
+          (<%= pluralize(included_price.quantity, t("billing/products.#{product.id}.quantity")) %>)
+        <% end %>
+      <% end.to_sentence %>
+    <% else %>
+      No Products Added
+    <% end %>
+  <% end %>
+
+  <%= p.content_for :status do %>
+    <%= render 'shared/attributes/option', object: subscription, attribute: :status %>
+  <% end %>
+
+  <%= p.content_for :actions do %>
+    <div class="space-x">
+      <%= render "account/#{subscription.provider_subscription_type.underscore.pluralize}/cell_actions", subscription: subscription %>
+    </div>
+  <% end %>
+<% end %>

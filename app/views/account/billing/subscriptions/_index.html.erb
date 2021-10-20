@@ -1,0 +1,55 @@
+<% team = @team || @team %>
+<% context ||= team %>
+<% collection ||= :billing_subscriptions %>
+<% hide_actions ||= false %>
+<% hide_back ||= false %>
+
+<%= render 'account/shared/box', divider: true do |p| %>
+
+  <% p.content_for :title, t(".contexts.#{context.class.name.underscore}.header") %>
+  <% p.content_for :description, t(".contexts.#{context.class.name.underscore}.description") %>
+
+  <% p.content_for :table do %>
+    <div class="-mt-4 <%= 'border-b' unless (hide_actions || hide_back) %> border-gray-900 border-opacity-5 divide-y divide-gray-900 divide-opacity-5">
+
+      <% if freemium_enabled? && subscriptions.not_canceled.empty? %>
+        <%= render "shared/cell" do |p| %>
+          <% p.content_for :title, "Free Plan" %>
+          <% p.content_for :status, "Active" %>
+          <% p.content_for :actions do %>
+            <%= link_to "Upgrade", [:new, :account, team, :billing_subscription], class: "button button-smaller new" %>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <% if subscriptions.not_canceled.any? %>
+        <% subscriptions.not_canceled.each do |subscription| %>
+          <%= render "account/billing/subscriptions/cell", subscription: subscription %>
+        <% end %>
+      <% end %>
+
+      <% if subscriptions.canceled.any? %>
+        <div class="bg-gray-50">
+          <% subscriptions.canceled.each do |subscription| %>
+            <%= render "account/billing/subscriptions/cell", subscription: subscription %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+  <% end %>
+
+  <% p.content_for :actions do %>
+    <% unless hide_actions %>
+      <% if context == team %>
+        <% if can? :create, Billing::Subscription.new(team: team) %>
+          <%= link_to t('.buttons.new'), [:new, :account, team, :billing_subscription], class: "#{first_button_primary(:billing_subscription)} new" %>
+        <% end %>
+      <% end %>
+
+      <% unless hide_back %>
+        <%= link_to t('global.buttons.back'), [:account, context], class: "#{first_button_primary(:billing_subscription)} back" %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

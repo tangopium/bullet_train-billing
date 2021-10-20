@@ -1,0 +1,28 @@
+<%= form_with model: subscription, url: (subscription.persisted? ? [:account, subscription] : [:account, @team, :billing_subscriptions]), local: true, class: 'form' do |form| %>
+  <%= render 'account/shared/forms/errors', form: form %>
+
+  <%= form.hidden_field :provider_subscription_type %>
+
+  <% with_field_settings form: form do %>
+    <%= render 'shared/fields/date_and_time_field', method: :cycle_ends_at %>
+    <%= render 'shared/fields/buttons', method: :status %>
+    <%# 🚅 super scaffolding will insert new fields above this line. %>
+  <% end %>
+
+  <%= form.fields_for :provider_subscription, subscription.provider_subscription do |provider_subscription_form| %>
+    <%= provider_subscription_form.hidden_field :id %>
+    <% with_field_settings form: provider_subscription_form do %>
+      <%= render "account/#{subscription.provider_subscription_type.underscore.pluralize}/fields", form: provider_subscription_form, subscription: subscription %>
+    <% end %>
+  <% end %>
+
+  <div class="buttons">
+    <%= form.submit (form.object.persisted? ? t('.buttons.update') : t('.buttons.create')), class: "button" %>
+    <% if form.object.persisted? %>
+    <%= link_to t('global.buttons.cancel'), [:account, subscription], class: "button-secondary" %>
+    <% else %>
+    <%= link_to t('global.buttons.cancel'), [:account, @team, :billing_subscriptions], class: "button-secondary" %>
+    <% end %>
+  </div>
+
+<% end %>

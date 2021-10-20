@@ -1,0 +1,34 @@
+<% unless @subscription.included_prices.any? %>
+  <div class="lg:px-12 lg:pb-14">
+    <h1 class="brand-title text-light-gradient">The Pricing Table</h1>
+    <p class="brand-description max-w-3xl">Below you can see examples of Bullet Train's support for freemium business models and different categories of plans which you can use for “Monthly vs. Annual” pricing. Select the “Live Demo” plan to see how we handle user sign-ups!</p>
+  </div>
+
+  <%= render 'pricing_table' %>
+<% else %>
+  <%= render 'account/shared/page' do |p| %>
+    <% p.content_for :title, t('.section') %>
+    <% p.content_for :body do %>
+      <%= render 'account/shared/box', divider: true do |p| %>
+        <% p.content_for :title, t('.header') %>
+        <% p.content_for :description, t('.description') %>
+        <% p.content_for :body do %>
+          <% if @subscription.provider_subscription_type %>
+            <%= render 'form', subscription: @subscription %>
+          <% else %>
+            <%= form_with model: @subscription, url: [:new, :account, @team, :billing_subscription], method: :get, local: true, class: 'form' do |form| %>
+              <%= render 'account/shared/forms/errors', form: form %>
+              <% with_field_settings form: form do %>
+                <%= render 'shared/fields/buttons', method: :provider_subscription_type, html_options: {autofocus: true} %>
+              <% end %>
+              <div class="buttons">
+                <%= form.submit t('.buttons.next'), class: "button" %>
+                <%= link_to t('global.buttons.cancel'), [:account, @team, :billing_subscriptions], class: "button-secondary" %>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

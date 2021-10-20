@@ -1,0 +1,9 @@
+en:
+  billing/prices:
+    quantity:
+      options:
+        memberships: Per Seat
+    interval:
+      options:
+        month: Per Month
+        year: Per Year

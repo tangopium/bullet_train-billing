@@ -1,0 +1,64 @@
+<% subscription = @subscription || @subscription %>
+<% context ||= subscription %>
+<% collection ||= :included_prices %>
+<% hide_actions ||= false %>
+<% hide_back ||= false %>
+
+<%= render 'account/shared/box' do |p| %>
+  <% p.content_for :title, t(".contexts.#{context.class.name.underscore}.header") %>
+  <% p.content_for :description do %>
+    <%= t(".contexts.#{context.class.name.underscore}.description") %>
+  <% end %>
+
+  <% p.content_for :table do %>
+    <% if included_prices.any? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th><%= t('.fields.price.heading') %></th>
+            <th><%= t('.fields.quantity.heading') %></th>
+            <%# 🚅 super scaffolding will insert new field headers above this line. %>
+            <th><%= t('.fields.created_at.heading') %></th>
+            <th class="text-right"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% included_prices.each do |included_price| %>
+            <% with_attribute_settings object: included_price do %>
+              <tr data-id="<%= included_price.id %>">
+                <td><%= render 'shared/attributes/belongs_to', attribute: :price, url: [:account, included_price] %></td>
+                <td><%= render 'shared/attributes/text', attribute: :quantity %></td>
+                <%# 🚅 super scaffolding will insert new fields above this line. %>
+                <td><%= render 'shared/attributes/date_and_time', attribute: :created_at %></td>
+                <td class="buttons">
+                  <% unless hide_actions %>
+                    <% if can? :edit, included_price %>
+                      <%= link_to t('.buttons.shorthand.edit'), [:edit, :account, included_price], class: 'button-secondary button-smaller' %>
+                    <% end %>
+                    <% if can? :destroy, included_price %>
+                      <%= button_to t('.buttons.shorthand.destroy'), [:account, included_price], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(included_price)) }, class: 'button-secondary button-smaller' %>
+                    <% end %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  <% end %>
+
+  <% p.content_for :actions do %>
+    <% unless hide_actions %>
+      <% if context == subscription %>
+        <% if can? :create, Billing::Subscriptions::IncludedPrice.new(subscription: subscription) %>
+          <%= link_to t('.buttons.new'), [:new, :account, subscription, :included_price], class: "#{first_button_primary(:included_price)} new" %>
+        <% end %>
+      <% end %>
+
+      <% unless hide_back %>
+        <%= link_to t('global.buttons.back'), [:account, context], class: "#{first_button_primary(:included_price)} back" %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

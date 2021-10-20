@@ -1,0 +1,98 @@
+en:
+  billing/subscriptions/included_prices: &included_prices
+    label: &label Included Prices
+    breadcrumbs:
+      label: *label
+    navigation:
+      label: *label
+      icon: fal fa-puzzle-piece
+    buttons: &buttons
+      new: Add New Included Price
+      create: Create Included Price
+      edit: Edit Included Price
+      update: Update Included Price
+      destroy: Remove Included Price
+      shorthand:
+        edit: Edit
+        destroy: Delete
+      confirmations:
+        # TODO customize for your use-case.
+        destroy: Are you sure you want to remove %{included_price_name}? This will also remove it's associated data. This can't be undone.
+    fields: &fields
+      id:
+        heading: Included Price ID
+      subscription_id:
+        heading: Subscription ID
+      price_id: &price
+        _: &price_id Price
+        label: *price_id
+        heading: *price_id
+        placeholder: Select
+      price: *price
+      quantity:
+        _: &quantity Quantity
+        label: *quantity
+        heading: *quantity
+      # 🚅 super scaffolding will insert new fields above this line.
+      created_at:
+        _: &created_at Added
+        label: *created_at
+        heading: *created_at
+      updated_at:
+        _: &updated_at Updated
+        label: *updated_at
+        heading: *updated_at
+    api:
+      collection_actions: "Collection Actions for Included Prices"
+      index: "List Included Prices"
+      create: "Add a New Included Price"
+      member_actions: "Actions for an Individual Included Price"
+      show: "Retrieve a Included Price"
+      update: "Update a Included Price"
+      destroy: "Delete a Included Price"
+      fields: *fields
+    index:
+      section: "%{subscriptions_possessive} Included Prices"
+      contexts:
+        billing/subscription:
+          header: Included Prices
+          description: Below is a list of Included Prices that have been added for %{subscription_name}.
+          description_empty: No Included Prices have been added for %{subscription_name}.
+      fields: *fields
+      buttons: *buttons
+    show:
+      section: "%{included_price_name}"
+      header: Included Price Details
+      description: Below are the details we have for %{included_price_name}.
+      manage_description: You'll also find options for updating these details or removing %{included_price_name} from %{subscription_name} entirely.
+      fields: *fields
+      buttons: *buttons
+    form: &form
+      buttons: *buttons
+      fields: *fields
+    new:
+      section: "New Included Price for %{subscription_name}"
+      header: New Included Price Details
+      description: Please provide the details of the new Included Price you'd like to add to %{subscription_name}.
+      form: *form
+    edit:
+      section: "%{included_price_name}"
+      header: Edit Included Price Details
+      description: You can update the details or settings for %{included_price_name} below.
+      form: *form
+    notifications:
+      created: Included Price was successfully created.
+      updated: Included Price was successfully updated.
+      destroyed: Included Price was successfully destroyed.
+  account:
+    billing:
+      subscriptions:
+        included_prices: *included_prices
+  activerecord:
+    attributes:
+      billing/subscriptions/included_price:
+        price_id: *price_id
+        quantity: *quantity
+        # 🚅 super scaffolding will insert new activerecord attributes above this line.
+        created_at: *created_at
+        updated_at: *updated_at

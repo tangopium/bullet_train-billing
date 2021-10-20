@@ -1,0 +1,34 @@
+<%= render 'account/shared/page' do |p| %>
+  <% p.content_for :title, t('.section') %>
+  <% p.content_for :body do %>
+    <%= render 'account/shared/box', divider: true do |p| %>
+      <% p.content_for :title, t('.header') %>
+      <% p.content_for :description do %>
+        <%= t('.description') %>
+        <%= t('.manage_description') if can? :manage, @subscription %>
+      <% end %>
+
+      <% p.content_for :body do %>
+        <% with_attribute_settings object: @subscription, strategy: :label do %>
+          <%= render 'shared/attributes/option', attribute: :provider_subscription_type %>
+          <%= render 'shared/attributes/date_and_time', attribute: :cycle_ends_at %>
+          <%= render 'shared/attributes/option', attribute: :status %>
+          <%# 🚅 super scaffolding will insert new fields above this line. %>
+        <% end %>
+
+        <% with_attribute_settings object: @subscription.provider_subscription, strategy: :label do %>
+          <%= render "account/#{@subscription.provider_subscription_type.underscore.pluralize}/attributes", subscription: subscription %>
+        <% end %>
+      <% end %>
+
+      <% p.content_for :actions do %>
+        <%= link_to t('.buttons.edit'), [:edit, :account, @subscription], class: first_button_primary if can? :edit, @subscription %>
+        <%= button_to t('.buttons.destroy'), [:account, @subscription], method: :delete, class: first_button_primary, data: { confirm: t('.buttons.confirmations.destroy', model_locales(@subscription)) } if can? :destroy, @subscription %>
+        <%= link_to t('global.buttons.back'), [:account, @team, :billing_subscriptions], class: first_button_primary %>
+      <% end %>
+    <% end %>
+
+    <%= render 'account/billing/subscriptions/included_prices/index', included_prices: @subscription.included_prices, hide_back: true %>
+    <%# 🚅 super scaffolding will insert new children above this line. %>
+  <% end %>
+<% end %>

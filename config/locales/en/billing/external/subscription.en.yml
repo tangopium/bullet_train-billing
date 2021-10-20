@@ -1,0 +1,15 @@
+en:
+  billing/external/subscriptions: &subscriptions
+    fields:
+      notes:
+        _: &notes Notes
+        label: *notes
+        heading: *notes
+  account:
+    billing:
+      external:
+        subscriptions: *subscriptions
+  activerecord:
+    attributes:
+      billing/external/subscription:
+        notes: *notes
