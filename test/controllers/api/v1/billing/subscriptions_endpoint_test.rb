@@ -81,7 +81,7 @@ class Api::V1::Billing::SubscriptionsEndpointTest < Api::Test
   test "update" do
     # Post an attribute update ensure nothing is seriously broken.
     put "/api/v1/billing/subscriptions/#{@subscription.id}", params: {
-      access_token: access_token,
+      access_token: access_token
       # 🚅 super scaffolding will also insert new fields above this line.
     }
 

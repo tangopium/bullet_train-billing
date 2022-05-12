@@ -63,15 +63,13 @@ class Account::Billing::Subscriptions::IncludedPricesController < Account::Appli
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def included_price_params
-    strong_params = params.require(:billing_subscriptions_included_price).permit(
+    params.require(:billing_subscriptions_included_price).permit(
       :price_id,
-      :quantity,
+      :quantity
       # 🚅 super scaffolding will insert new fields above this line.
       # 🚅 super scaffolding will insert new arrays above this line.
     )
 
     # 🚅 super scaffolding will insert processing for new fields above this line.
-
-    strong_params
   end
 end

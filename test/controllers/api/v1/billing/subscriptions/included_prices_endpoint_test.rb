@@ -79,7 +79,7 @@ class Api::V1::Billing::Subscriptions::IncludedPricesEndpointTest < Api::Test
     # Post an attribute update ensure nothing is seriously broken.
     put "/api/v1/billing/subscriptions/included_prices/#{@included_price.id}", params: {
       access_token: access_token,
-      quantity: 2,
+      quantity: 2
       # 🚅 super scaffolding will also insert new fields above this line.
     }
 

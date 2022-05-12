@@ -106,7 +106,7 @@ class Account::Billing::SubscriptionsController < Account::ApplicationController
         [
           :id,
           :price_id,
-          :quantity, # TODO It's possible we don't want to allow them to set this.
+          :quantity # TODO It's possible we don't want to allow them to set this.
         ]
       ],
 
@@ -114,8 +114,8 @@ class Account::Billing::SubscriptionsController < Account::ApplicationController
         :id,
 
         # External subscription attributes:
-        :notes,
-      ],
+        :notes
+      ]
     )
 
     assign_date_and_time(strong_params, :cycle_ends_at)
