@@ -4,16 +4,16 @@
   <div class="lg:flex flex-row justify-center">
     <% prices.each_with_index do |price, i| %>
       <div class="bg-gray-50 flex-1 lg:max-w-md border ml-0 mr-0 mt-0 mb-5 <%= "lg:-ml-px lg:-mr-px lg:-mt-5 lg:mb-0 pricing-table-shadow" if i == 1 %> <%= i == 1 ? "z-10" : "z-0" %>">
-        <div class="bg-white <%= "border-t-4 border-blue" if i == 1 %>">
+        <div class="bg-white <%= "border-t-4 border-primary-500" if i == 1 %>">
           <div class="text-center py-10 px-5 border-b">
             <%#= image_tag asset_pack_path("media/images/#{current_theme}/products/#{price.product.image}"), width: 80, height: 80, class: "inline mb-7" %>
-            <div class="uppercase text-blue tracking-wider font-semibold text-2xl">
+            <div class="uppercase text-primary-500 tracking-wider font-semibold text-2xl">
               <%= price.product.label_string %>
             </div>
           </div>
         </div>
         <div class="bg-white text-center py-10 px-5 border-b">
-          <div class="text-6xl font-semibold text-black <%= "text-blue" if i == 1 %>"><%= smaller_currency_symbol(number_to_currency(price.currency_amount, precision: 0, locale: :en)) %></div>
+          <div class="text-6xl font-semibold text-black <%= "text-primary-500" if i == 1 %>"><%= smaller_currency_symbol(number_to_currency(price.currency_amount, precision: 0, locale: :en)) %></div>
           <div class="mt-3 pt-2 inline-block border-t border-gray-300 uppercase text-lg opacity-40 tracking-wider">
             <%= t("billing/prices.interval.options.#{price.interval}") %>
             <% if price.quantity %>
@@ -37,7 +37,7 @@
           <ul class="text-base mt-5 text-gray-500 space-y-3">
             <% 5.times do %>
               <li class="flex items-start">
-                <div class="flex-shrink-0 text-green">
+                <div class="flex-shrink-0 text-green-500">
                   <i class="ti ti-check fas fa-check"></i>
                 </div>
                 <p class="ml-3">
