@@ -1,0 +1,8 @@
+<% classes ||= "" %>
+
+<%= form_for @subscription, url: [:account, @team, :billing_subscriptions] do |form| %>
+  <%= form.hidden_field "provider_subscription_type", value: "#{ENV["BILLING_DEFAULT_SUBSCRIPTION"] || "Billing::Stripe::Subscription"}" %>
+  <%= form.hidden_field "included_prices_attributes[0][price_id]", value: price.id %>
+  <%= form.hidden_field "included_prices_attributes[0][quantity]", value: price.calculate_quantity(@team) %>
+  <%= form.submit "Select", class: classes %>
+<% end %>

@@ -4,7 +4,7 @@
     <p class="brand-description max-w-3xl">Below you can see examples of Bullet Train's support for freemium business models and different categories of plans which you can use for “Monthly vs. Annual” pricing. Select the “Live Demo” plan to see how we handle user sign-ups!</p>
   </div>
 
-  <%= render 'pricing_table' %>
+  <%= render 'shared/billing/pricing_table', prices: Billing::Price.all %>
 <% else %>
   <%= render 'account/shared/page' do |p| %>
     <% p.content_for :title, t('.section') %>
