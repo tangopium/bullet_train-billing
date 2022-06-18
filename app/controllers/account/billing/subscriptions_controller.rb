@@ -113,6 +113,10 @@ class Account::Billing::SubscriptionsController < Account::ApplicationController
       provider_subscription_attributes: [
         :id,
 
+        # TODO We need a way for `bullet_train-billing-stripe` to define this.
+        # Stripe subscription attributes:
+        :stripe_subscription_id,
+
         # External subscription attributes:
         :notes
       ]

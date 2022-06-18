@@ -30,6 +30,8 @@ en:
         heading: *provider_subscription_type
         options:
           "Billing::External::Subscription": Externally Managed
+          # TODO We need a way for `bullet_train-billing-stripe` to define these.
+          "Billing::Stripe::Subscription": Stripe
       cycle_ends_at:
         _: &cycle_ends_at Cycle Ends At
         label: *cycle_ends_at

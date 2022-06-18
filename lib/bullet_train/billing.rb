@@ -6,3 +6,7 @@ module BulletTrain
     # Your code goes here...
   end
 end
+
+def freemium_enabled?
+  Billing::Product.find_by(id: "free").present?
+end

@@ -6,7 +6,7 @@
       <div class="bg-gray-50 flex-1 lg:max-w-md border ml-0 mr-0 mt-0 mb-5 <%= "lg:-ml-px lg:-mr-px lg:-mt-5 lg:mb-0 pricing-table-shadow" if i == 1 %> <%= i == 1 ? "z-10" : "z-0" %>">
         <div class="bg-white <%= "border-t-4 border-blue" if i == 1 %>">
           <div class="text-center py-10 px-5 border-b">
-            <%= image_tag asset_pack_path("media/images/#{current_theme}/products/#{price.product.image}"), width: 80, height: 80, class: "inline mb-7" %>
+            <%#= image_tag asset_pack_path("media/images/#{current_theme}/products/#{price.product.image}"), width: 80, height: 80, class: "inline mb-7" %>
             <div class="uppercase text-blue tracking-wider font-semibold text-2xl">
               <%= price.product.label_string %>
             </div>
@@ -22,7 +22,7 @@
           </div>
           <div>
             <%= form_for @subscription, url: [:account, @team, :billing_subscriptions] do |form| %>
-              <%= form.hidden_field "provider_subscription_type", value: "#{ENV["BILLING_DEFAULT_SUBSCRIPTION"] || "Billing::External::Subscription"}" %>
+              <%= form.hidden_field "provider_subscription_type", value: "#{ENV["BILLING_DEFAULT_SUBSCRIPTION"] || "Billing::Stripe::Subscription"}" %>
               <%= form.hidden_field "included_prices_attributes[0][price_id]", value: price.id %>
               <%= form.hidden_field "included_prices_attributes[0][quantity]", value: price.calculate_quantity(@team) %>
               <%= form.submit "Select", class: "button rounded-full text-base mt-7" %>

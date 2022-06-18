@@ -7,6 +7,7 @@ class Billing::Subscriptions::IncludedPrice < ApplicationRecord
 
   # 🚅 add has_many associations above.
 
+  has_one :team, through: :subscription
   # 🚅 add has_one associations above.
 
   # 🚅 add scopes above.
@@ -17,7 +18,6 @@ class Billing::Subscriptions::IncludedPrice < ApplicationRecord
 
   # 🚅 add callbacks above.
 
-  delegate :team, to: :subscription
   # 🚅 add delegations above.
 
   def valid_prices
