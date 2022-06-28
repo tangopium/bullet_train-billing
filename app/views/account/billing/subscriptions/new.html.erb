@@ -1,7 +1,7 @@
 <% unless @subscription.included_prices.any? %>
   <div class="lg:px-12 lg:pb-14">
-    <h1 class="brand-title text-light-gradient">The Pricing Table</h1>
-    <p class="brand-description max-w-3xl">Below you can see examples of Bullet Train's support for freemium business models and different categories of plans which you can use for “Monthly vs. Annual” pricing. Select the “Live Demo” plan to see how we handle user sign-ups!</p>
+    <h1 class="brand-title text-light-gradient"><%= t(".pricing.header") %></h1>
+    <p class="brand-description max-w-3xl"><%= t(".pricing.description").html_safe %> </p>
   </div>
 
   <%= render 'shared/billing/pricing_table', prices: Billing::Price.all %>

@@ -8,4 +8,12 @@ class Billing::Product < ApplicationHash
   def label_string
     I18n.t("billing/products.#{id}.name")
   end
+
+  def features
+    I18n.t("billing/products.#{id}.features")
+  end
+
+  def description
+    I18n.t("billing/products.#{id}.description")
+  end
 end
