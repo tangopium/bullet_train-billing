@@ -4,9 +4,7 @@ en:
       name: Free
     basic:
       name: Basic
-      quantity: Seat
     pro:
       name: Pro
-      quantity: Seat
     extras:
       name: Extras

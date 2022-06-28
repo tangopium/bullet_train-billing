@@ -26,4 +26,8 @@ class Billing::Price < ApplicationHash
   def currency_amount
     amount / 100.0
   end
+
+  def highlight?
+    !!highlight
+  end
 end

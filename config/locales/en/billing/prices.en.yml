@@ -1,9 +1,16 @@
 en:
   billing/prices:
-    quantity:
-      options:
-        memberships: Per Seat
-    interval:
-      options:
-        month: Per Month
-        year: Per Year
+    models:
+      memberships:
+        quantifier: Seat
+        per: Per Seat
+    intervals:
+      month:
+        description: Monthly
+        per: Per Month
+      3_months:
+        description: Quarterly
+        per: Per Quarter
+      year:
+        description: Annually
+        per: Per Year

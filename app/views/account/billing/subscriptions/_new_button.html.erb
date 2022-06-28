@@ -4,5 +4,5 @@
   <%= form.hidden_field "provider_subscription_type", value: "#{ENV["BILLING_DEFAULT_SUBSCRIPTION"] || "Billing::Stripe::Subscription"}" %>
   <%= form.hidden_field "included_prices_attributes[0][price_id]", value: price.id %>
   <%= form.hidden_field "included_prices_attributes[0][quantity]", value: price.calculate_quantity(@team) %>
-  <%= form.submit "Select", class: classes %>
+  <%= form.submit price.trial_days ? t(".start_trial", days: price.trial_days) : t(".select"), class: classes %>
 <% end %>

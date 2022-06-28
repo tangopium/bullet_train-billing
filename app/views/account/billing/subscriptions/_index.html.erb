@@ -22,10 +22,8 @@
         <% end %>
       <% end %>
 
-      <% if subscriptions.not_canceled.any? %>
-        <% subscriptions.not_canceled.each do |subscription| %>
-          <%= render "account/billing/subscriptions/cell", subscription: subscription %>
-        <% end %>
+      <% subscriptions.not_canceled.each do |subscription| %>
+        <%= render "account/billing/subscriptions/cell", subscription: subscription %>
       <% end %>
 
       <% if subscriptions.canceled.any? %>
@@ -43,7 +41,9 @@
     <% unless hide_actions %>
       <% if context == team %>
         <% if can? :create, Billing::Subscription.new(team: team) %>
-          <%= link_to t('.buttons.new'), [:new, :account, team, :billing_subscription], class: "#{first_button_primary(:billing_subscription)} new" %>
+          <% unless team.billing_subscriptions.not_canceled.any? %>
+            <%= link_to t('.buttons.new'), [:new, :account, team, :billing_subscription], class: "#{first_button_primary(:billing_subscription)} new" %>
+          <% end %>
         <% end %>
       <% end %>
 

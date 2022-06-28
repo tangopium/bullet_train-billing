@@ -5,7 +5,9 @@
         <% product = included_price.price.product %>
         <% capture do %>
           <%= product.label_string %>
-          (<%= pluralize(included_price.quantity, t("billing/products.#{product.id}.quantity")) %>)
+          <% if included_price.price.quantity.present? %>
+            (<%= pluralize(included_price.quantity, t("billing/prices.models.#{included_price.price.quantity}.quantifier")) %>)
+          <% end %>
         <% end %>
       <% end.to_sentence %>
     <% else %>

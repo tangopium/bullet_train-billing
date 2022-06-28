@@ -16,6 +16,10 @@ class Account::Billing::SubscriptionsController < Account::ApplicationController
 
   # GET /account/teams/:team_id/billing/subscriptions/new
   def new
+    if @team.billing_subscriptions.not_canceled.any?
+      return redirect_to [:account, @team, :billing_subscriptions], notice: "You can only have one active subscription at a time!"
+    end
+
     if @subscription.provider_subscription_type_valid?
       @subscription.build_provider_subscription
     elsif params[:commit]
