@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.homepage = "https://github.com/bullet-train-co/bullet_train-billing"
   spec.summary = "Bullet Train Billing"
   spec.description = spec.summary
-  spec.license = "Commercial"
+  spec.license = "Nonstandard"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the "allowed_push_host"
   # to allow pushing to a single host or delete this section to allow pushing to any host.
