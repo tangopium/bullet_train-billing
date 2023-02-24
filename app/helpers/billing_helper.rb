@@ -5,14 +5,14 @@ module BillingHelper
   end
 
   def group_prices_by_duration(prices)
-    prices.group_by { |price| [price.duration == 1 ? nil : price.duration, price.interval.pluralize(price.duration)].compact.join("_").to_sym }
+    prices.group_by { |price| [(price.duration == 1) ? nil : price.duration, price.interval.pluralize(price.duration)].compact.join("_").to_sym }
   end
 
   # TODO Make this support more than monthly and annual.
   def calculate_discount(subject, baseline)
     months_per_interval = {
       month: 1.0,
-      year: 12.0,
+      year: 12.0
     }
 
     subject_cost_per_month = subject.amount / (months_per_interval[subject.interval.to_sym] * subject.duration)
