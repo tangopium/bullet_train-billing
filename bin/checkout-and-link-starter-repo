@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# I can't remember if there was another fix for this.
+rm LICENSE.chromedriver
+
 # Look for a matching branch on the starter repository when running tests on CircleCI.
 CI_BRANCH=$CIRCLE_BRANCH
 if [[ -v CI_BRANCH ]]
@@ -25,23 +28,20 @@ else
   git clone https://github.com/bullet-train-co/bullet_train.git .
 fi
 
-package_name=$(find ../../*.gemspec | sed 's/\.gemspec//' | sed 's/..\///g')
+package=$(find ../../*.gemspec | sed 's/\.gemspec//' | sed 's/..\///g')
 
-packages=(
-  $package_name
-)
+echo $(ls)
 
-for package in "${packages[@]}"
-do
-  :
-  grep -v "gem \"$package\"" Gemfile > Gemfile.tmp
-  mv Gemfile.tmp Gemfile
-  echo "gem \"$package\", path: \"../..\"" >> Gemfile
-done
-
-updates="${packages[@]}"
-
-# TODO Not 100% sure on this, but to get CI working we had to replace this.
-# bundle lock --update $updates
+echo "Removing '$package' from the Gemfile."
+grep -v "gem \"$package\"" Gemfile > Gemfile.tmp
+echo "Replacing the Gemfile."
+mv Gemfile.tmp Gemfile
+echo "Adding the package again, but linking two directories up."
+echo "gem \"$package\", path: \"../..\"" >> Gemfile
 
 bundle install
+
+cp ../../db/migrate/* db/migrate
+git status
+
+bundle exec rake db:migrate
