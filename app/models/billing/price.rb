@@ -1,4 +1,11 @@
 class Billing::Price < ApplicationHash
+  field :amount
+  field :currency
+  field :duration
+  field :interval
+  field :trial_days
+  field :quantity
+
   self.data = YAML.load_file("config/models/billing/products.yml").map do |product_id, product|
     if product["prices"]
       product["prices"].map do |key, value|

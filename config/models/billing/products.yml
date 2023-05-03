@@ -14,7 +14,7 @@ basic:
       count: 3
       enforcement: hard
     scaffolding/absolutely_abstract/creative_concepts:
-      count: nil
+      count: null
   prices:
     basic_2021:
       amount: 1000
@@ -30,7 +30,7 @@ pro:
       count: 10
       enforcement: soft
     scaffolding/absolutely_abstract/creative_concepts:
-      count: nil
+      count: null
   prices:
     pro_2021:
       amount: 10000

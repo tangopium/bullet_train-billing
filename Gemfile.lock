@@ -358,6 +358,7 @@ PLATFORMS
   arm64-darwin-22
 
 DEPENDENCIES
+  active_hash
   bullet_train-billing!
   sprockets-rails
   sqlite3
