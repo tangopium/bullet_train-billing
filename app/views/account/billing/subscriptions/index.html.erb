@@ -2,5 +2,11 @@
   <% p.content_for :title, t('.section') %>
   <% p.content_for :body do %>
     <%= render 'index', subscriptions: @subscriptions %>
+
+    <%# TODO: Eventually we should use the umbrella_subscription_enabled? helper, but for now we're doing the other thing so we don't have to wait for PRs to land in other repos. %>
+    <%# if umbrella_subscriptions_enabled? %>
+    <% if defined?(BulletTrain::Billing::UmbrellaSubscriptions) %>
+      <%= render 'account/billing/umbrella/subscriptions/index' %>
+    <% end %>
   <% end %>
 <% end %>
