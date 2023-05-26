@@ -10,16 +10,23 @@
           <% end %>
         <% end %>
       <% end.to_sentence %>
-      <% if subscription.umbrella? %>
-        (via <%= subscription.covering_team.label_string %>)
-      <% end %>
     <% else %>
       No Products Added
+    <% end %>
+    <% if subscription.umbrella? %>
+      (via <%= subscription.covering_team.label_string %>)
     <% end %>
   <% end %>
 
   <%= p.content_for :status do %>
-    <%= render 'shared/attributes/option', object: subscription, attribute: :status %>
+    <% if subscription.umbrella? && !subscription.valid_umbrella? && subscription.active? %>
+      &nbsp;
+      <%= render 'account/shared/alert' do %>
+        <%= t('.invalid_umbrella_subscription') %>
+      <% end %>
+    <% else %>
+      <%= render 'shared/attributes/option', object: subscription, attribute: :status %>
+    <% end %>
   <% end %>
 
   <%= p.content_for :actions do %>

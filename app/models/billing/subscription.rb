@@ -54,7 +54,7 @@ class Billing::Subscription < ApplicationRecord
   # define a basic verison of available_prices that just returns included_prices and then the
   # umbrella_subscriptions gem could monkeypatch with this version?
   def available_prices
-    if umbrella? && provider_subscription&.covering_team&.current_billing_subscription.present?
+    if defined?(BulletTrain::Billing::UmbrellaSubscriptions) && umbrella?
       provider_subscription.covering_team.current_billing_subscription.available_prices
     else
       included_prices
@@ -69,6 +69,10 @@ class Billing::Subscription < ApplicationRecord
   # TODO: Maybe this should go in the umbrella_subscriptions gem?
   def covering_team
     provider_subscription.covering_team
+  end
+
+  def valid_umbrella?
+    umbrella? && provider_subscription.covering_team&.can_extend_umbrella_subscriptions?
   end
   # 🚅 add methods above.
 end
