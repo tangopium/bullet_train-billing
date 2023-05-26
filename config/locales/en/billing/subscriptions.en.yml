@@ -108,7 +108,7 @@ en:
       start_trial: "%{days}-Day Free Trial"
       select: "Select"
     cell:
-      invalid_umbrella_subscription: This Umbrella Subscirption is currently inactive because the covering team is not subscribed to a plan that supports Umbrella Subscriptions.
+      invalid_umbrella_subscription: This Umbrella Subscription is currently inactive because the covering team is not subscribed to a plan that supports Umbrella Subscriptions.
   account:
     billing:
       subscriptions: *subscriptions
