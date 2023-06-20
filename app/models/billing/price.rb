@@ -5,6 +5,7 @@ class Billing::Price < ApplicationHash
   field :interval
   field :trial_days
   field :quantity
+  field :allow_promotion_codes
 
   self.data = YAML.load_file("config/models/billing/products.yml").map do |product_id, product|
     if product["prices"]
