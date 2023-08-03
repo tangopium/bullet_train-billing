@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bullet_train-billing (1.0.8)
+    bullet_train-billing (1.0.9)
       bullet_train
       rails (>= 6.0)
 
