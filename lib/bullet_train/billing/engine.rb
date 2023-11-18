@@ -3,7 +3,7 @@ module BulletTrain
     class Engine < ::Rails::Engine
       initializer "bullet_train-billing.quantity" do
         ActiveSupport::Notifications.subscribe("memberships.quantity-changed") do |_name, _start, _finish, _id, payload|
-          billing_subscription = payload[:team].billing_subscriptions.first
+          billing_subscription = payload[:team].current_billing_subscription
 
           next unless billing_subscription.present?
 
