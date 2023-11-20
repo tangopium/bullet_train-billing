@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bullet_train-billing (1.0.10)
+    bullet_train-billing (1.0.11)
       bullet_train
       rails (>= 6.0)
 
@@ -79,12 +79,11 @@ GEM
       public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
     awesome_print (1.9.2)
-    aws_cf_signer (0.1.3)
-    bcrypt (3.1.19)
+    base64 (0.2.0)
+    bcrypt (3.1.20)
     builder (3.2.4)
-    bullet_train (1.3.7)
+    bullet_train (1.6.17)
       awesome_print
-      bullet_train-fields
       bullet_train-has_uuid
       bullet_train-roles
       bullet_train-routes
@@ -93,6 +92,7 @@ GEM
       bullet_train-themes
       cable_ready (~> 5.0.0)
       cancancan
+      colorizer
       commonmarker
       devise
       devise-pwned_password
@@ -104,6 +104,7 @@ GEM
       image_processing
       microscope
       nice_partials (~> 0.9)
+      omniauth
       pagy
       possessive
       premailer-rails
@@ -114,25 +115,22 @@ GEM
       unicode-emoji
       valid_email
       xxhash
-    bullet_train-fields (1.3.7)
-      chronic
-      cloudinary
-      phonelib
+    bullet_train-has_uuid (1.6.17)
       rails (>= 6.0.0)
-    bullet_train-has_uuid (1.3.7)
-      rails (>= 6.0.0)
-    bullet_train-roles (1.3.7)
+    bullet_train-roles (1.6.17)
       active_hash
       activesupport
       cancancan
     bullet_train-routes (1.0.0)
       rails (>= 6.0.0)
-    bullet_train-scope_validator (1.3.7)
-    bullet_train-super_load_and_authorize_resource (1.3.7)
+    bullet_train-scope_validator (1.6.17)
+      rails
+    bullet_train-super_load_and_authorize_resource (1.6.17)
+      cancancan
       rails (>= 6.0.0)
-    bullet_train-themes (1.3.7)
+    bullet_train-themes (1.6.17)
       rails (>= 6.0.0)
-    cable_ready (5.0.1)
+    cable_ready (5.0.3)
       actionpack (>= 5.2)
       actionview (>= 5.2)
       activesupport (>= 5.2)
@@ -140,18 +138,15 @@ GEM
       thread-local (>= 1.1.0)
     cancancan (3.5.0)
     charlock_holmes (0.7.7)
-    chronic (0.10.2)
-    cloudinary (1.27.0)
-      aws_cf_signer
-      rest-client (>= 2.0.0)
+    colorizer (0.0.2)
     commonmarker (0.23.10)
     concurrent-ruby (1.2.0)
     connection_pool (2.4.1)
     crass (1.0.6)
-    css_parser (1.14.0)
+    css_parser (1.16.0)
       addressable
-    date (3.3.3)
-    devise (4.9.2)
+    date (3.3.4)
+    devise (4.9.3)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0)
@@ -160,32 +155,30 @@ GEM
     devise-pwned_password (0.1.10)
       devise (~> 4)
       pwned (~> 2.0.0)
-    domain_name (0.5.20190701)
-      unf (>= 0.0.5, < 1.0.0)
     email_reply_parser (0.5.11)
     erubi (1.12.0)
+    event_stream_parser (0.3.0)
     extended_email_reply_parser (0.5.1)
       activesupport
       charlock_holmes
       email_reply_parser (~> 0.5.9)
       mail
-    faraday (2.7.10)
+    faraday (2.7.11)
+      base64
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
     faraday-multipart (1.0.4)
       multipart-post (~> 2)
     faraday-net_http (3.0.2)
     fastimage (2.2.7)
-    ffi (1.15.5)
+    ffi (1.16.3)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
-    globalid (1.1.0)
-      activesupport (>= 5.0)
+    globalid (1.2.1)
+      activesupport (>= 6.1)
+    hashie (5.0.0)
     hiredis (0.6.3)
     htmlentities (4.3.4)
-    http-accept (1.7.0)
-    http-cookie (1.0.5)
-      domain_name (~> 0.5)
     http_accept_language (2.1.1)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
@@ -207,34 +200,33 @@ GEM
     microscope (1.1.1)
       activerecord (>= 4.1.0)
       activesupport (>= 4.1.0)
-    mime-types (3.5.0)
-      mime-types-data (~> 3.2015)
-    mime-types-data (3.2023.0808)
     mini_magick (4.12.0)
     mini_mime (1.1.5)
     minitest (5.17.0)
     multipart-post (2.3.0)
-    net-imap (0.3.7)
+    net-imap (0.4.5)
       date
       net-protocol
     net-pop (0.1.2)
       net-protocol
-    net-protocol (0.2.1)
+    net-protocol (0.2.2)
       timeout
-    net-smtp (0.3.3)
+    net-smtp (0.4.0)
       net-protocol
-    netrc (0.11.0)
-    nice_partials (0.9.3)
+    nice_partials (0.10.0)
       actionview (>= 4.2.6)
-    nio4r (2.5.9)
+    nio4r (2.6.0)
     nokogiri (1.14.2-arm64-darwin)
       racc (~> 1.4)
+    omniauth (2.1.1)
+      hashie (>= 3.4.6)
+      rack (>= 2.2.3)
+      rack-protection
     orm_adapter (0.5.0)
-    pagy (6.0.4)
+    pagy (6.2.0)
     parallel (1.22.1)
     parser (3.2.1.0)
       ast (~> 2.4.1)
-    phonelib (0.8.2)
     possessive (1.0.1)
     premailer (1.21.0)
       addressable
@@ -244,10 +236,12 @@ GEM
       actionmailer (>= 3)
       net-smtp
       premailer (~> 1.7, >= 1.7.9)
-    public_suffix (5.0.3)
+    public_suffix (5.0.4)
     pwned (2.0.2)
     racc (1.6.2)
     rack (2.2.6.2)
+    rack-protection (3.1.0)
+      rack (~> 2.2, >= 2.2.4)
     rack-test (2.0.2)
       rack (>= 1.3)
     rails (7.0.4.2)
@@ -277,18 +271,13 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
-    rake (13.0.6)
-    redis-client (0.16.0)
+    rake (13.1.0)
+    redis-client (0.18.0)
       connection_pool
     regexp_parser (2.7.0)
-    responders (3.1.0)
+    responders (3.1.1)
       actionpack (>= 5.2)
       railties (>= 5.2)
-    rest-client (2.1.0)
-      http-accept (>= 1.7.0, < 2.0)
-      http-cookie (>= 1.0.2, < 2.0)
-      mime-types (>= 1.16, < 4.0)
-      netrc (~> 0.8)
     rexml (3.2.5)
     rubocop (1.44.1)
       json (~> 2.3)
@@ -305,16 +294,17 @@ GEM
     rubocop-performance (1.15.2)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
-    ruby-openai (5.0.0)
+    ruby-openai (6.2.0)
+      event_stream_parser (>= 0.3.0, < 1.0.0)
       faraday (>= 1)
       faraday-multipart (>= 1)
     ruby-progressbar (1.11.0)
-    ruby-vips (2.1.4)
+    ruby-vips (2.2.0)
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
     showcase-rails (0.4.6)
       rails (>= 6.1.0)
-    sidekiq (7.1.2)
+    sidekiq (7.2.0)
       concurrent-ruby (< 2)
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
@@ -335,19 +325,19 @@ GEM
       rubocop-performance (= 1.15.2)
     standardrb (1.0.1)
       standard
-    thor (1.2.2)
+    thor (1.3.0)
     thread-local (1.1.0)
-    timeout (0.4.0)
+    timeout (0.4.1)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.8.2)
+    unf_ext (0.0.9.1)
     unicode-display_width (2.4.2)
-    unicode-emoji (3.3.2)
+    unicode-emoji (3.4.0)
       unicode-version (~> 1.0)
     unicode-version (1.3.0)
-    valid_email (0.1.4)
+    valid_email (0.2.0)
       activemodel
       mail (>= 2.6.1)
       simpleidn
@@ -357,7 +347,7 @@ GEM
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     xxhash (0.5.0)
-    zeitwerk (2.6.11)
+    zeitwerk (2.6.12)
 
 PLATFORMS
   arm64-darwin-21
