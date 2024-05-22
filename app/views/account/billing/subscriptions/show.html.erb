@@ -17,7 +17,7 @@
         <% end %>
 
         <% with_attribute_settings object: @subscription.provider_subscription, strategy: :label do %>
-          <%= render "account/#{@subscription.provider_subscription_type.underscore.pluralize}/attributes", subscription: subscription %>
+          <%= render "account/#{@subscription.provider_subscription_type.underscore.pluralize}/attributes", subscription: @subscription %>
         <% end %>
       <% end %>
 

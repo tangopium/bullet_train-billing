@@ -11,7 +11,7 @@
         <% end %>
       <% end.to_sentence %>
     <% else %>
-      No Products Added
+      <%= subscription.product.label_string %>
     <% end %>
     <% if subscription.umbrella? %>
       (via <%= subscription.covering_team.label_string %>)

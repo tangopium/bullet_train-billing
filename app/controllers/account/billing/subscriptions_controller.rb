@@ -103,6 +103,7 @@ class Account::Billing::SubscriptionsController < Account::ApplicationController
     strong_params = params.require(:billing_subscription).permit(
       :provider_subscription_type,
       :cycle_ends_at,
+      :product_id,
       :status,
       # 🚅 super scaffolding will insert new fields above this line.
       # 🚅 super scaffolding will insert new arrays above this line.

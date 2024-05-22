@@ -3,6 +3,7 @@ class Billing::Subscription < ApplicationRecord
 
   belongs_to :team
   belongs_to :provider_subscription, dependent: :destroy, polymorphic: true
+  belongs_to :product, class_name: "Billing::Product"
   # 🚅 add belongs_to associations above.
 
   has_many :included_prices, class_name: "Billing::Subscriptions::IncludedPrice", dependent: :destroy, foreign_key: :subscription_id
