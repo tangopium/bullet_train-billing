@@ -1,5 +1,7 @@
 en:
   billing/prices:
+    custom_pricing: Custom Pricing
+    contact_us: Contact Us
     models:
       memberships:
         quantifier: Seat

@@ -35,7 +35,7 @@ class Billing::Price < ApplicationHash
     amount / 100.0
   end
 
-  def highlight?
-    !!highlight
+  def duration_key
+    [(self.duration == 1) ? nil : self.duration, self.interval.pluralize(self.duration)].compact.join("_").to_sym
   end
 end

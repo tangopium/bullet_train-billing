@@ -3,6 +3,8 @@ class Billing::Product < ApplicationHash
     {"id" => key}.merge(value)
   end
 
+  scope :showcased, -> { where(showcase: true) }
+
   has_many :prices, class_name: "Billing::Price"
 
   def label_string
@@ -15,5 +17,9 @@ class Billing::Product < ApplicationHash
 
   def description
     I18n.t("billing/products.#{id}.description")
+  end
+
+  def highlight?
+    !!highlight
   end
 end

@@ -10,7 +10,7 @@
     <p class="brand-description max-w-3xl"><%= t(".pricing.description").html_safe %> </p>
   </div>
 
-  <%= render 'shared/billing/pricing_table', prices: Billing::Price.all %>
+  <%= render 'pricing_table', products: Billing::Product.showcased %>
 <% else %>
   <%= render 'account/shared/page' do |p| %>
     <% p.content_for :title, t('.section') %>
