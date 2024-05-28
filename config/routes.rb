@@ -6,12 +6,8 @@ Rails.application.routes.draw do
       resources :teams, only: [] do
         namespace :billing do
           resources :subscriptions do
-            scope module: "subscriptions" do
-              resources :included_prices, only: collection_actions
-            end
-
-            namespace :subscriptions do
-              resources :included_prices, except: collection_actions
+            member do
+              get :upgrade
             end
           end
         end

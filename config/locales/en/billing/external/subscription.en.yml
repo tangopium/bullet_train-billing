@@ -1,5 +1,7 @@
 en:
   billing/external/subscriptions: &subscriptions
+    upgrade_button:
+      select: "Upgrade"
     fields:
       notes:
         _: &notes Notes

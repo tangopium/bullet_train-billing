@@ -12,6 +12,8 @@
         <% with_attribute_settings object: @subscription, strategy: :label do %>
           <%= render 'shared/attributes/option', attribute: :provider_subscription_type %>
           <%= render 'shared/attributes/date_and_time', attribute: :cycle_ends_at %>
+          <%= render 'shared/attributes/belongs_to', attribute: :price %>
+          <%= render 'shared/attributes/belongs_to', attribute: :product %>
           <%= render 'shared/attributes/option', attribute: :status %>
           <%# 🚅 super scaffolding will insert new fields above this line. %>
         <% end %>
@@ -28,7 +30,6 @@
       <% end %>
     <% end %>
 
-    <%= render 'account/billing/subscriptions/included_prices/index', included_prices: @subscription.included_prices, hide_back: true %>
     <%# 🚅 super scaffolding will insert new children above this line. %>
   <% end %>
 <% end %>

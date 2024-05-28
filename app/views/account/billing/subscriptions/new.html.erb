@@ -1,4 +1,4 @@
-<% unless @subscription.included_prices.any? %>
+<% unless @subscription.price.present? %>
 
   <%# TODO: Eventually we should use the umbrella_subscription_enabled? helper, but for now we're doing the other thing so we don't have to wait for PRs to land in other repos. %>
   <%# if umbrella_subscriptions_enabled? %>

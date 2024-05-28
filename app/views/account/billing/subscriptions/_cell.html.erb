@@ -2,11 +2,11 @@
   <%= p.content_for :title do %>
     <% if subscription.available_prices.any? %>
       <%= subscription.available_prices.map do |included_price| %>
-        <% product = included_price.price.product %>
+        <% product = included_price&.product %>
         <% capture do %>
           <%= product.label_string %>
-          <% if included_price.price.quantity.present? %>
-            (<%= pluralize(included_price.quantity, t("billing/prices.models.#{included_price.price.quantity}.quantifier")) %>)
+          <% if included_price.quantity.present? %>
+            (<%= pluralize(included_price.quantity, t("billing/prices.models.#{included_price.quantity}.quantifier")) %>)
           <% end %>
         <% end %>
       <% end.to_sentence %>

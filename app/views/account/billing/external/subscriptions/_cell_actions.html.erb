@@ -1,0 +1,3 @@
+<% if subscription.active? && subscription.upgradeable? %>
+  <%= button_to "Upgrade", [:upgrade, :account, subscription], method: :get, data: {turbo: 'false'}, class: "button button-smaller" %>
+<% end %>

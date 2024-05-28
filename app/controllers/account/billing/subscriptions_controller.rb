@@ -1,5 +1,5 @@
 class Account::Billing::SubscriptionsController < Account::ApplicationController
-  account_load_and_authorize_resource :subscription, through: :team, through_association: :billing_subscriptions
+  account_load_and_authorize_resource :subscription, through: :team, through_association: :billing_subscriptions, member_actions: [:upgrade]
 
   # GET /account/teams/:team_id/billing/subscriptions
   # GET /account/teams/:team_id/billing/subscriptions.json
@@ -48,21 +48,8 @@ class Account::Billing::SubscriptionsController < Account::ApplicationController
 
     @subscription.provider_subscription.team = @team
 
-    # TODO When we try to save normally, we get:
-    #  @errors=[#<ActiveModel::NestedError attribute=included_prices.subscription, type=blank, options={:message=>:required}>]>
-    # Why isn't this working for us automatically? This seems like something Rails should be handling for us.
-    included_prices = @subscription.included_prices.to_a
-    @subscription.included_prices.clear
-
     respond_to do |format|
       if @subscription.save
-
-        # TODO Figure out why this is required. See note above.
-        included_prices.each do |included_price|
-          included_price.subscription = @subscription
-          included_price.save!
-        end
-
         format.html { redirect_to [:checkout, :account, @subscription.provider_subscription], notice: I18n.t("billing/subscriptions.notifications.created") }
         format.json { render :show, status: :created, location: [:account, @subscription] }
       else
@@ -86,6 +73,10 @@ class Account::Billing::SubscriptionsController < Account::ApplicationController
     end
   end
 
+  def upgrade
+    render :upgrade, layout: "pricing"
+  end
+
   # DELETE /account/billing/subscriptions/:id
   # DELETE /account/billing/subscriptions/:id.json
   def destroy
@@ -103,17 +94,12 @@ class Account::Billing::SubscriptionsController < Account::ApplicationController
     strong_params = params.require(:billing_subscription).permit(
       :provider_subscription_type,
       :cycle_ends_at,
+      :price_id,
       :product_id,
+      :quantity,
       :status,
       # 🚅 super scaffolding will insert new fields above this line.
       # 🚅 super scaffolding will insert new arrays above this line.
-      included_prices_attributes: [
-        [
-          :id,
-          :price_id,
-          :quantity # TODO It's possible we don't want to allow them to set this.
-        ]
-      ],
 
       provider_subscription_attributes: [
         :id,

@@ -7,12 +7,21 @@ en:
         quantifier: Seat
         per: Per Seat
     intervals:
-      month:
+      1_month:
         description: Monthly
         per: Per Month
+      2_months:
+        description: Bi-Monthly
+        per: Per 2 Months
       3_months:
         description: Quarterly
         per: Per Quarter
-      year:
+      4_months:
+        description: Every 4 Months
+        per: Per 4 Months
+      6_months:
+        description: Semi-Annually
+        per: Per 6 Months
+      1_year:
         description: Annually
         per: Per Year

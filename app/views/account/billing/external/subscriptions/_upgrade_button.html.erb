@@ -1,9 +1,9 @@
 <% classes ||= "" %>
 
-<%= form_for @subscription, url: [:account, @team, :billing_subscriptions] do |form| %>
+<%= form_for @subscription, url: [:account, @team, :billing_subscriptions], method: :post do |form| %>
   <%= form.hidden_field "provider_subscription_type", value: "#{ENV["BILLING_DEFAULT_SUBSCRIPTION"] || "Billing::Stripe::Subscription"}" %>
   <%= form.hidden_field "product_id", value: price.product.id %>
   <%= form.hidden_field "price_id", value: price.id %>
   <%= form.hidden_field "quantity", value: price.calculate_quantity(@team) %>
-  <%= form.submit price.trial_days ? t(".start_trial", days: price.trial_days) : t(".select"), class: classes %>
+  <%= form.submit t(".select"), class: classes %>
 <% end %>

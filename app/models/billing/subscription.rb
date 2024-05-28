@@ -4,9 +4,9 @@ class Billing::Subscription < ApplicationRecord
   belongs_to :team
   belongs_to :provider_subscription, dependent: :destroy, polymorphic: true
   belongs_to :product, class_name: "Billing::Product"
+  belongs_to :price, class_name: "Billing::Price"
   # 🚅 add belongs_to associations above.
 
-  has_many :included_prices, class_name: "Billing::Subscriptions::IncludedPrice", dependent: :destroy, foreign_key: :subscription_id
   # 🚅 add has_many associations above.
 
   # 🚅 add has_one associations above.
@@ -29,8 +29,6 @@ class Billing::Subscription < ApplicationRecord
 
   PENDING_STATUSES = ["initiated", "pending"]
   ACTIVE_STATUSES = ["trialing", "active", "overdue", "canceling"]
-
-  accepts_nested_attributes_for :provider_subscription, :included_prices
 
   def build_provider_subscription(params = {})
     raise "invalid provider subscription type" unless provider_subscription_type_valid?
@@ -58,7 +56,7 @@ class Billing::Subscription < ApplicationRecord
     if defined?(BulletTrain::Billing::UmbrellaSubscriptions) && umbrella?
       provider_subscription.covering_team.current_billing_subscription.available_prices
     else
-      included_prices
+      [self.price]
     end
   end
 
@@ -74,6 +72,10 @@ class Billing::Subscription < ApplicationRecord
 
   def valid_umbrella?
     umbrella? && provider_subscription.covering_team&.can_extend_umbrella_subscriptions?
+  end
+
+  def upgradeable?
+    product.can_upgrade_to.present? && product.can_upgrade_to.any?
   end
   # 🚅 add methods above.
 end

@@ -7,17 +7,15 @@ module BulletTrain
 
           next unless billing_subscription.present?
 
-          included_price = billing_subscription.included_prices.first
-
           # if not billing per seat, return
-          next unless included_price.price[:quantity] == "memberships"
+          next unless billing_subscription.price[:quantity] == "memberships"
 
-          new_quantity = included_price.price.calculate_quantity(payload[:team])
+          new_quantity = billing_subscription.price.calculate_quantity(payload[:team])
 
           # return if quantity hasn't changed
-          next if included_price[:quantity] == new_quantity
+          next if billing_subscription[:quantity] == new_quantity
 
-          ActiveSupport::Notifications.instrument("memberships.provider-subscription-quantity-changed", {provider_subscription: billing_subscription.provider_subscription, included_price:, quantity: new_quantity})
+          ActiveSupport::Notifications.instrument("memberships.provider-subscription-quantity-changed", {provider_subscription: billing_subscription.provider_subscription, price:, quantity: new_quantity})
         end
       end
     end

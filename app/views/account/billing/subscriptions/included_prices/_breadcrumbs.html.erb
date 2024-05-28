@@ -1,8 +1,0 @@
-<% included_price ||= @included_price %>
-<% subscription ||= @subscription || included_price&.subscription %>
-<%= render 'account/billing/subscriptions/breadcrumbs', subscription: subscription %>
-<%= render 'account/shared/breadcrumb', label: t('.label'), url: [:account, subscription, :included_prices] %>
-<% if included_price&.persisted? %>
-  <%= render 'account/shared/breadcrumb', label: included_price.label_string, url: [:account, included_price] %>
-<% end %>
-<%= render 'account/shared/breadcrumbs/actions', only_for: 'billing/subscriptions/included_prices' %>

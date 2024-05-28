@@ -13,6 +13,7 @@ en:
       edit: Edit Subscription
       update: Update Subscription
       destroy: Remove Subscription
+      current_plan: Current Plan
       shorthand:
         edit: Edit
         destroy: Cancel
@@ -90,6 +91,15 @@ en:
       section: "New Subscription for %{team_name}"
       header: New Subscription Details
       description: Please provide the details of the new Subscription you'd like to add to %{team_name}.
+      pricing:
+        header: The Pricing Page
+        description: "Below you can see different plans, including a plan with a free trial, and examples of those same plans offered at an annual discount. Everything you see is powered by the confguration in <code>config/models/billing/products.yml</code> and translations in <code>config/locales/en/billing/products.en.yml</code>."
+      form: *form
+      buttons: *buttons
+    upgrade:
+      section: "Upgrade Subscription"
+      header: Upgrade Subscription Details
+      description: You can upgrade your current subscription to a new plan below.
       pricing:
         header: The Pricing Page
         description: "Below you can see different plans, including a plan with a free trial, and examples of those same plans offered at an annual discount. Everything you see is powered by the confguration in <code>config/models/billing/products.yml</code> and translations in <code>config/locales/en/billing/products.en.yml</code>."

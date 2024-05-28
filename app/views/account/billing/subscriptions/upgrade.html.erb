@@ -1,0 +1,5 @@
+<div class="lg:px-12 lg:pb-14">
+  <h1 class="brand-title text-light-gradient"><%= t(".pricing.header") %></h1>
+  <p class="brand-description max-w-3xl"><%= t(".pricing.description").html_safe %> </p>
+</div>
+<%= render 'pricing_table', products: Billing::Product.where(id: [@subscription.product.id, @subscription.product.can_upgrade_to]), subscription: @subscription %>

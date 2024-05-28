@@ -36,6 +36,6 @@ class Billing::Price < ApplicationHash
   end
 
   def duration_key
-    [(self.duration == 1) ? nil : self.duration, self.interval.pluralize(self.duration)].compact.join("_").to_sym
+    interval ? (duration || 1).send(interval) : nil
   end
 end
