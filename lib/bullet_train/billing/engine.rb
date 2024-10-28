@@ -8,7 +8,7 @@ module BulletTrain
           next unless billing_subscription.present?
 
           # if not billing per seat, return
-          next unless billing_subscription.price[:quantity] == "memberships"
+          next unless billing_subscription.price.try(:[], :quantity) == "memberships"
 
           new_quantity = billing_subscription.price.calculate_quantity(payload[:team])
 
